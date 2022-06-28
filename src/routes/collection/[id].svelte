@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import { config } from "../../config";
+  import { config } from "../../base-config";
 
   export async function load({ params, fetch }) {
     try {

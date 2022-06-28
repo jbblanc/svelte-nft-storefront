@@ -1,5 +1,5 @@
 <script>
-import { config } from "../../config";
+import { config } from "../../base-config";
 </script>
 
 <footer class="footer items-center p-4 bg-neutral text-neutral-content">

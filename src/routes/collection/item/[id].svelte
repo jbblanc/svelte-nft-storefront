@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import { config } from "../../../config";
+  import { config } from "../../../base-config";
   export async function load({ params, fetch }) {
     try {
       const itemId = params["id"];
@@ -43,6 +43,7 @@ import Breadcrumb from "../../../_components/Breadcrumb.svelte";
   import ItemTechDetails from "./_components/ItemTechDetails.svelte";
   import ItemRawContent from "./_components/ItemRawContent.svelte";
   import ItemListing from "./_components/ItemListing.svelte";
+  import { truncater } from "../../../libs/util.js";
 
   export let item: CollectionItem;
   export let history: CollectionItemHistory[];
@@ -50,7 +51,7 @@ import Breadcrumb from "../../../_components/Breadcrumb.svelte";
 
 <Seo
   title="{item.attributes.title} - by {config.app_name}"
-  description={item.attributes.description}
+  description={truncater(item.attributes.description, 155)}
   image={item.media.image.thumb}
   imageType="image/jpeg"
 />

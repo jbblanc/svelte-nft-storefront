@@ -1,3 +1,10 @@
+export interface Config {
+  theme: string;
+  app_name: string;
+  api_url: string;
+  org_id: string;
+}
+
 export interface Network {
   id: number;
   name: string;

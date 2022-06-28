@@ -7,7 +7,7 @@
 </script>
 
 
-<div class="card card-compact w-72 m-4 bg-base-300 shadow-xl">
+<div class="card card-compact w-72 m-4 bg-accent bg-opacity-20 shadow-xl">
   <div class="card-body">
     <figure><img src="{item.media.image.tiny}" alt="{item.attributes.title}" /></figure>
 

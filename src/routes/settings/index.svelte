@@ -1,16 +1,23 @@
 <script lang="ts">
-  import { config } from "../../config";
+  import { goto } from "$app/navigation";
+  import { config } from "../../base-config";
+  import { theme } from "../../stores/theme";
   import PageHeading from "../../_components/PageHeading.svelte";
   import Button from "../../_components/Button.svelte";
+  import { saveConfigToLocalStorage, saveThemeToLocalStorage } from "../../libs/config-storage";
 
   let api_url = config.api_url;
   let org_id = config.org_id;
-  let theme = config.theme;
 
   function saveSettings() {
+    const redirectToGallery = api_url !== config.api_url || org_id !== config.org_id;
     config.api_url = api_url;
     config.org_id = org_id;
-  config.theme = theme;
+    saveConfigToLocalStorage(config);
+    saveThemeToLocalStorage($theme);
+    if (redirectToGallery) {
+      goto("/gallery");
+    }
   }
 </script>
 
@@ -34,10 +41,11 @@
   <label class="label">
     <span class="label-text">Choose your theme</span>
   </label>
-  <select bind:value={theme} class="select select-bordered">
-    <option>light</option>
-    <option selected>dark</option>
-    <option>cupcake</option>
+  <select bind:value={$theme} class="select select-bordered">
+    <option>fantasy</option>
+    <option selected>autumn</option>
+    <option>luxury</option>
+    <option>cyberpunk</option>
   </select>
 </div>
 <Button label="Save & Apply" on:click={saveSettings} />

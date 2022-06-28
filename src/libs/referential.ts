@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import { config } from '../config';
+import { config } from '../base-config';
 import type { Network } from './interfaces';
 
 const networkContentKey = 'networks';

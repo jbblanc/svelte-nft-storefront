@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { config } from "../../config";
   import type { CollectionItem } from "../../libs/interfaces";
   import CollectionCard from "./_components/CollectionCard.svelte";
   import Seo from "../../_components/Seo.svelte";
   import PageHeading from "../../_components/PageHeading.svelte";
   import Breadcrumb from "../../_components/Breadcrumb.svelte";
+  import { config } from "../../base-config";
 
   async function loadCollectionsForActiveOrg(): Promise<CollectionItem[]> {
     const resp = await fetch(

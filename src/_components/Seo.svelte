@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { config } from "../config";
+  import { config } from "../base-config";
 
   export let title = `${config.app_name} - built with SvelteKit`; //$_("landing.home.seo.title");
   export let description =

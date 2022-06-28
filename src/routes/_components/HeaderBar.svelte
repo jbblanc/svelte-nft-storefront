@@ -2,7 +2,7 @@
   import { connected } from "svelte-ethers-store";
   import ConnectButton from "../../_components/ConnectButton.svelte";
   import { Identicon } from "svelte-ethers-store/components";
-  import { config } from "../../config";
+  import { config } from "../../base-config";
   $: console.log('test ' + $connected);
 
 </script>
@@ -15,6 +15,7 @@
     <ul class="menu menu-horizontal p-0">
       <li><a href="/gallery">Gallery</a></li>
       <li><a href="/claim">Claim</a></li>
+      <li><a href="/settings">Settings</a></li>
     </ul>
   </div>
   <div class="flex-none ml-10">

@@ -1,0 +1,18 @@
+
+Fix layout (width ) on gallery and collection page
+
+Add CNFT or useful training/doc links to the footer
+
+Add a referential page to consult referential active resources (network, payment tokens,)
+
+Display API status
+
+Basic content on home page (FAQ, useful links...)
+
+Pagination for collections list
+Pagination for items list
+Pagination for history in item
+Pagination for history in auction
+
+Latest config stored/updated in local storage (to prevent page refresh)
+Config as a svelte store

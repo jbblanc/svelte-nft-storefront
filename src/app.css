@@ -1,0 +1,33 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
+  /*
+  .btn-primary {
+    @apply bg-orange-400 text-white;
+  }
+
+  .btn-primary-disabled {
+    @apply bg-green-400 bg-opacity-40 text-white;
+  }
+
+  .btn-primary-outline {
+    @apply bg-transparent text-red-500 border-red-500 border;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-green-400;
+  }
+
+  .btn-tertiary {
+    @apply bg-brand-green text-green-400;
+  }
+
+  .btn-tertiary-outline {
+    @apply bg-transparent text-blue-500 border-blue-500 border;
+  }*/
+}

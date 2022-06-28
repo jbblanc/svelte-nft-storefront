@@ -5,7 +5,7 @@
 </script>
 
 <div class="flex items-center justify-center p-4">
-  <img src={item.media.image.original} alt={item.attributes.title} />
+  <img src={item.media.image.full} alt={item.attributes.title} />
 </div>
 <div class="flex items-center justify-center px-4">
   <div>

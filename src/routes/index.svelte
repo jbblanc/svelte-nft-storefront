@@ -4,7 +4,7 @@
 
 <Seo />
 
-<div class="hero bg-base-200">
+<div class="hero bg-base-100">
   <div class="hero-content text-center">
     <div class="max-w-md">
       <h1 class="text-5xl font-bold">Hello there</h1>

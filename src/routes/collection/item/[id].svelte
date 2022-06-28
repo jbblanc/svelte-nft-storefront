@@ -57,7 +57,7 @@ import Breadcrumb from "../../../_components/Breadcrumb.svelte";
 />
 
 
-<div class="w-full px-12 py-3 mb-4">
+<div class="w-full sm:px-24 py-3 mb-4">
     <Breadcrumb {item} />
 </div>
 

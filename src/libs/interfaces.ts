@@ -16,6 +16,12 @@ export interface Collection {
   items: CollectionItem[];
 }
 
+export interface CollectionQueryResult extends Collection {
+  has_more: boolean;
+  cursor: string;
+  total_results: number;
+}
+
 export interface CollectionItem {
   id: string;
   attributes: {

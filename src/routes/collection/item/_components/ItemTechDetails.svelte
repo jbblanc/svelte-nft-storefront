@@ -9,11 +9,12 @@
   import ItemComponentHeading from "./ItemComponentHeading.svelte";
   import ItemTechDetailsRow from "./ItemTechDetailsRow.svelte";
   import { shortener } from "../../../../libs/util.js";
+  import { networks } from "../../../../stores/networks";
 
   export let item: CollectionItem;
 
   let network: Network;
-  network = getNetwork(item.token_contract?.network_id);
+  network = getNetwork(item.token_contract?.network_id, $networks);
 </script>
 
 <div class="grid grid-flow">

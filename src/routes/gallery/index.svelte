@@ -21,7 +21,7 @@
 
 <Seo />
 
-<section>
+<section class="px-24">
   <div class="grid grid-cols-2">
     <Breadcrumb />
     <div class="grid justify-items-end">
@@ -44,5 +44,5 @@
       {/each}
     </div>
   {/await}
-</section>
 
+</section>

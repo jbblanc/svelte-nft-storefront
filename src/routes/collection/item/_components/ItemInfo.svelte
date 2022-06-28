@@ -2,10 +2,11 @@
   import type { CollectionItem, Network } from "../../../../libs/interfaces";
   import { getNetwork } from "../../../../libs/referential.js";
   import ItemMetadata from "./ItemMetadata.svelte";
+  import { networks } from "../../../../stores/networks";
 
   export let item: CollectionItem;
   let network: Network;
-  network = getNetwork(item.token_contract?.network_id);
+  network = getNetwork(item.token_contract?.network_id, $networks);
   console.log(network);
 </script>
 

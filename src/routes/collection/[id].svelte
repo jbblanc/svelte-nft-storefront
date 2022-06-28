@@ -1,23 +1,20 @@
 <script lang="ts" context="module">
-  import { config } from "../../base-config";
 
   export async function load({ params, fetch }) {
     try {
       const collectionId = params["id"];
       let respCols = await fetch(`${config.api_url}/api/v2/public/${config.org_id}/collections`);
-      let respItems = await fetch(`${config.api_url}/api/v2/public/${config.org_id}/items?collection_id=${collectionId}`);
+      let respItems = await fetch(`${config.api_url}/api/v2/public/${config.org_id}/items?collection_id=${collectionId}&limit=10`);
       if (respItems.status === 200 && respCols.status === 200) {
         const collections = await respCols.json();
         const collection = collections.filter(c => c.id === collectionId)[0];
-        const body = await respItems.json();
-        const items = body.items;
+        const collectionResult = await respItems.json();
+        console.log(respItems);
         return {
           status: 200,
           props: {
-            collection: {
-              ...collection,
-              items
-            }
+            collection,
+            collectionResult
           }
         };
       } else {
@@ -36,13 +33,51 @@
 </script>
 
 <script lang="ts">
-  import type { Collection } from "../../libs/interfaces";
+  import type { CollectionQueryResult, Collection, CollectionItem } from "../../libs/interfaces";
   import ItemCard from "./_components/ItemCard.svelte";
   import Seo from "../../_components/Seo.svelte";
   import PageHeading from "../../_components/PageHeading.svelte";
   import Breadcrumb from "../../_components/Breadcrumb.svelte";
+  import { config } from "../../base-config";
 
   export let collection: Collection;
+  export let collectionResult: CollectionQueryResult;
+  $:console.log(collectionResult);
+
+  let displayedItems: CollectionItem[];
+  let currentPage = 1;
+  let totalItems = collectionResult.total_results;
+  let itemsPerPage = 10;
+  let totalPages = totalItems <= itemsPerPage ? 1 : (totalItems / itemsPerPage + (totalItems % itemsPerPage > 0 ? 1 : 0));
+  let previousCnftCursor = null;
+  let nextCnftCursor = collectionResult.cursor;
+  let hasMore = collectionResult.has_more;
+  const cursors: string[] = ['', nextCnftCursor];// one cursor indexed per page number - 1
+
+  $: displayedItems = collectionResult.items;
+
+  async function loadPage(cursor: string): Promise<CollectionQueryResult> {
+    let respItems = await fetch(`${config.api_url}/api/v2/public/${config.org_id}/items?collection_id=${collection.id}&limit=${itemsPerPage}&cursor=${cursor}`);
+
+    return await respItems.json();
+  }
+
+  async function nextPage(): Promise<CollectionQueryResult> {
+    if (hasMore) {
+      currentPage++;
+      collectionResult = await loadPage(nextCnftCursor);
+      previousCnftCursor = nextCnftCursor;
+      nextCnftCursor = collectionResult.cursor;
+      cursors[currentPage - 1] = nextCnftCursor;
+    }
+  }
+
+  async function previousPage(): Promise<CollectionQueryResult> {
+    if (currentPage > 1) {
+      currentPage--;
+      collectionResult = await loadPage(cursors[currentPage - 1]);
+    }
+  }
 </script>
 
 <Seo
@@ -50,7 +85,7 @@
   description="{collection.name} - NFT Collection by ConsensysNFT"
 />
 
-<section>
+<section class="px-24">
   <div class="grid grid-cols-2">
     <Breadcrumb {collection} />
     <div class="grid justify-items-end">
@@ -60,12 +95,22 @@
   </div>
 
   <div class="grid xl:grid-cols-4 grid-cols-3 sm:grid-cols-1">
-    {#if !collection.items || collection.items.length === 0}
+    {#if !collectionResult.items || collectionResult.items.length === 0}
       <div>The collection is empty</div>
     {:else}
-      {#each collection.items as item}
+      {#each collectionResult.items as item}
         <ItemCard {item} />
       {/each}
     {/if}
+  </div>
+  <div>
+    {#if currentPage > 1}
+      <button on:click={previousPage}>Prev.</button>
+    {/if}
+    <div>Page {currentPage} / {totalPages}</div>
+    {#if hasMore}
+      <button on:click={nextPage}>Next.</button>
+    {/if}
+    <div>Total items: {totalItems}</div>
   </div>
 </section>

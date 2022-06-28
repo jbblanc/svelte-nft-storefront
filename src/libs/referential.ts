@@ -1,8 +1,5 @@
-import { getContext, setContext } from 'svelte';
 import { config } from '../base-config';
 import type { Network } from './interfaces';
-
-const networkContentKey = 'networks';
 
 let txScanUrls: Map<number, string>;
 let addressScanUrls: Map<number, string>;
@@ -38,18 +35,17 @@ export function initScanUrls() {
   );
 }
 
-export function loadNetworks(networks: Network[]) {
-  /*let networks: Network[] = [];
-  const resp = await fetch(`${config.api_url}/public/networks`);
+export async function loadNetworks(fetch: Function): Promise<Network[]> {
+  const resp = await fetch(`${config.api_url}/api/v2/public/networks`);
   if (resp.status === 200) {
-    networks = await resp.json();
-  }*/
-  setContext(networkContentKey, networks);
+    return await resp.json();
+  }
+  return null;
 }
 
-export function getNetwork(networkId: number): Network {
-  const networks = getContext(networkContentKey) as Network[];
+export function getNetwork(networkId: number, networks: Network[]): Network {
   if (networks) {
+    console.log(networks);
     const filtered = networks.filter((n) => n.id === networkId);
     return filtered[0];
   }

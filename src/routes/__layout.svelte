@@ -1,20 +1,16 @@
 <script lang="ts" context="module">
 
   import type { Network } from "../libs/interfaces";
+  import { loadNetworks } from "../libs/referential";
 
   export async function load({ fetch }) {
     try {
       console.log("fetching networks");
-      const resp = await fetch(`${config.api_url}/api/v2/public/networks`);
-      let networks: Network[]= [];
-      if (resp.status === 200) {
-        networks = await resp.json();
-
-      }
+      const initialNetworks = await loadNetworks(fetch);
       return {
         status: 200,
         props: {
-          networks
+          initialNetworks
         }
       };
     } catch (error) {
@@ -32,27 +28,29 @@
   import { fade } from "svelte/transition";
   import HeaderBar from "./_components/HeaderBar.svelte";
   import Footer from "./_components/Footer.svelte";
-  import { initScanUrls, loadNetworks } from "../libs/referential";
+  import { initScanUrls } from "../libs/referential";
   import { theme } from "../stores/theme.js";
   import { enrichConfigFromLocalStorage, getThemeIfAnyFromLocalStorage } from "../libs/config-storage";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
+  import { networks } from "../stores/networks";
 
-  export let networks: Network[];
+  export let initialNetworks: Network[];
 
   initScanUrls();
-  loadNetworks(networks);
+  $networks = initialNetworks;
 
-  onMount(()=>{
+  onMount(async () => {
     const res = enrichConfigFromLocalStorage(config);
     const themeToUse = getThemeIfAnyFromLocalStorage();
-    if(themeToUse){
+    if (themeToUse) {
       $theme = themeToUse;
     }
-    if(res.configHasChanged){
+    if (res.configHasChanged) {
       config.api_url = res.config.api_url;
       config.org_id = res.config.org_id;
-     goto('/');
+      $networks = await loadNetworks(fetch);
+      goto("/");
     }
   });
 
@@ -69,8 +67,8 @@
 </div>
 
 <style>
-  .main-layout{
-      display: grid;
-      grid-template-rows: 4rem auto 4rem;
-  }
+    .main-layout {
+        display: grid;
+        grid-template-rows: 4rem auto 4rem;
+    }
 </style>

@@ -46,7 +46,6 @@
   import PageHeading from '../../_components/PageHeading.svelte';
   import Breadcrumb from '../../_components/Breadcrumb.svelte';
   import { config } from '../../base-config';
-  import Button from '../../_components/Button.svelte';
   import PaginationControl from './_components/PaginationControl.svelte';
 
   export let collection: Collection;
@@ -54,7 +53,7 @@
   $: console.log(collectionResult);
 
   let displayedItems: CollectionItem[];
-  let itemsPerPage = 10;
+  let itemsPerPage = 12;
   let currentPage = 1;
   let totalItems = collectionResult.total_results;
   let totalPages =

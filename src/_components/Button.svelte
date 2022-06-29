@@ -3,6 +3,7 @@
 	export let style: string = "primary";
 	export let outline = false;
 	export let small = false;
+	export let disabled = false;
 </script>
 
 <button class="btn"
@@ -10,6 +11,7 @@
 				class:btn-secondary={style === "secondary"}
 				class:btn-outline={outline}
 				class:btn-sm={small}
+				{disabled}
 				on:click>{label}</button>
 
 <!--<button

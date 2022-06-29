@@ -6,7 +6,7 @@
         `${config.api_url}/api/v2/public/${config.org_id}/collections`,
       );
       let respItems = await fetch(
-        `${config.api_url}/api/v2/public/${config.org_id}/items?collection_id=${collectionId}&limit=10`,
+        `${config.api_url}/api/v2/public/${config.org_id}/items?collection_id=${collectionId}&limit=12`,
       );
       if (respItems.status === 200 && respCols.status === 200) {
         const collections = await respCols.json();

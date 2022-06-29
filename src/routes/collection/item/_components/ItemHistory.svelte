@@ -15,6 +15,15 @@
   export let allHistoryItems: CollectionItemHistory[] = [];
 
   let displayedHistoryItems: CollectionItemHistory[] = [];
+
+  function getBadgeColor(historyType: string): string {
+    console.log(historyType);
+    if (historyType === 'MINT') {
+      return 'red-700';
+    } else if (historyType === 'TRANSFER') {
+      return 'orange-400';
+    }
+  }
 </script>
 
 <div class="overflow-x-auto w-full">
@@ -36,7 +45,16 @@
         <tr>
           <td>{historyItem.timestamp}</td>
           <td>
-            <div class="flex items-center space-x-3">
+            <div
+              class="flex items-center space-x-3 badge uppercase text-gray-100"
+              class:border-green-500={historyItem.type === 'MINT'}
+              class:bg-green-500={historyItem.type === 'MINT'}
+              class:border-blue-300={historyItem.type === 'TRANSFER'}
+              class:bg-blue-300={historyItem.type === 'TRANSFER'}
+              class:border-gray-500={historyItem.type !== 'TRANSFER' &&
+                historyItem.type !== 'MINT'}
+              class:bg-gray-500={historyItem.type !== 'TRANSFER' &&
+                historyItem.type !== 'MINT'}>
               {historyItem.type}
             </div>
           </td>

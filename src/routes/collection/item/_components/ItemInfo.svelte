@@ -13,10 +13,10 @@
 <div class="grid grid-flow">
   <h1 class="text-4xl font-bold">{item.attributes.title}</h1>
   <div>
-    <div class="badge border-blue-400 bg-blue-400 uppercase text-gray-200">
+    <div class="badge border-blue-400 bg-blue-400 uppercase text-gray-100">
       {item.token_contract?.token_type}
     </div>
-    <div class="badge border-yellow-500 bg-yellow-500 uppercase text-gray-200">
+    <div class="badge border-yellow-500 bg-yellow-500 uppercase text-gray-100">
       {network?.name}
     </div>
     <div class="badge badge-outline uppercase">No active listing</div>

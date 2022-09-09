@@ -19,7 +19,9 @@
     <div class="badge border-yellow-500 bg-yellow-500 uppercase text-gray-100">
       {network?.name}
     </div>
-    <div class="badge badge-outline uppercase">No active listing</div>
+    <div class="badge badge-outline uppercase">
+      {item.listing ? item.listing.type : 'No active listing'}
+    </div>
   </div>
   <p class="mt-6">{item.attributes.description}</p>
   <div class="my-6">

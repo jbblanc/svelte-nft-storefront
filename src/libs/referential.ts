@@ -9,11 +9,13 @@ export function initScanUrls() {
   txScanUrls = new Map<number, string>();
   txScanUrls.set(1, 'https://etherscan.io/tx/${tx}');
   txScanUrls.set(4, 'https://rinkeby.etherscan.io/tx/${tx}');
+  txScanUrls.set(5, 'https://goerli.etherscan.io/tx/${tx}');
   txScanUrls.set(137, 'https://polygonscan.com/tx/${tx}');
   txScanUrls.set(80001, 'https://mumbai.polygonscan.com/tx/${tx}');
   addressScanUrls = new Map<number, string>();
   addressScanUrls.set(1, 'https://etherscan.io/address/${address}');
   addressScanUrls.set(4, 'https://rinkeby.etherscan.io/address/${address}');
+  addressScanUrls.set(5, 'https://goerli.etherscan.io/address/${address}');
   addressScanUrls.set(137, 'https://polygonscan.com/address/${address}');
   addressScanUrls.set(
     80001,
@@ -24,6 +26,10 @@ export function initScanUrls() {
   tokenScanUrls.set(
     4,
     'https://rinkeby.etherscan.io/token/${address}?a=${tokenId}',
+  );
+  tokenScanUrls.set(
+    5,
+    'https://goerli.etherscan.io/token/${address}?a=${tokenId}',
   );
   tokenScanUrls.set(
     137,

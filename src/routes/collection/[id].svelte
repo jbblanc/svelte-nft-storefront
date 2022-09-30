@@ -50,6 +50,7 @@
 
   export let collection: Collection;
   export let collectionResult: CollectionQueryResult;
+
   $: console.log(collectionResult);
 
   let displayedItems: CollectionItem[];

@@ -1,55 +1,19 @@
-<script lang="ts" context="module">
-  export async function load({ params, fetch }) {
-    try {
-      const collectionId = params['id'];
-      let respCols = await fetch(
-        `${config.api_url}/api/v2/public/${config.org_id}/collections`,
-      );
-      let respItems = await fetch(
-        `${config.api_url}/api/v2/public/${config.org_id}/items?collection_id=${collectionId}&limit=12`,
-      );
-      if (respItems.status === 200 && respCols.status === 200) {
-        const collections = await respCols.json();
-        const collection = collections.filter((c) => c.id === collectionId)[0];
-        const collectionResult = await respItems.json();
-        console.log(respItems);
-        return {
-          status: 200,
-          props: {
-            collection,
-            collectionResult,
-          },
-        };
-      } else {
-        return {
-          error: 'Collection not found',
-          status: 404,
-        };
-      }
-    } catch (error) {
-      return {
-        error,
-        status: 500,
-      };
-    }
-  }
-</script>
-
 <script lang="ts">
   import type {
     CollectionQueryResult,
     Collection,
     CollectionItem,
-  } from '../../libs/interfaces';
-  import ItemCard from './_components/ItemCard.svelte';
-  import Seo from '../../_components/Seo.svelte';
-  import PageHeading from '../../_components/PageHeading.svelte';
-  import Breadcrumb from '../../_components/Breadcrumb.svelte';
-  import { config } from '../../base-config';
-  import PaginationControl from './_components/PaginationControl.svelte';
+  } from '../../../libs/interfaces';
+  import ItemCard from '../_components/ItemCard.svelte';
+  import Seo from '../../../_components/Seo.svelte';
+  import PageHeading from '../../../_components/PageHeading.svelte';
+  import Breadcrumb from '../../../_components/Breadcrumb.svelte';
+  import { config } from '../../../base-config';
+  import PaginationControl from '../_components/PaginationControl.svelte';
 
-  export let collection: Collection;
-  export let collectionResult: CollectionQueryResult;
+  export let data;
+  let collection: Collection = data.collection;
+  let collectionResult: CollectionQueryResult = data.collectionResult;
 
   $: console.log(collectionResult);
 

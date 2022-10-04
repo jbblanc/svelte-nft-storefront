@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { browser } from '$app/env';
+  import { browser } from '$app/environment';
   import { defaultEvmStores } from 'svelte-ethers-store';
   import { connected, provider, signer } from 'svelte-ethers-store';
   import { onMount } from 'svelte';

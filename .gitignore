@@ -3,7 +3,6 @@ node_modules
 .idea
 .vercel
 build
-.idea
 # Keep environment variables out of version control
 .env
 

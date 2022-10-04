@@ -1,5 +1,7 @@
 node_modules
 .svelte-kit
+.idea
+.vercel
 build
 .idea
 # Keep environment variables out of version control
